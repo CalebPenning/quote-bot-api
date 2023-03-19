@@ -8,21 +8,28 @@ import sql from "./db"
 // create tables
 async function createTables() {
 	try {
-		const results = await sql`
+		const quotesResults = await sql`
             CREATE TABLE IF NOT EXISTS quotes (
                 id SERIAL UNIQUE PRIMARY KEY
                 body TEXT NOT NULL UNIQUE
             )
+        `
+		if (quotesResults) {
+			console.log("Results of creating tables -> ", quotesResults)
+		}
 
+		const keywordsResults = await sql`
             CREATE TABLE IF NOT EXISTS keywords (
                 id SERIAL UNIQUE PRIMARY KEY,
                 body TEXT NOT NULL UNIQUE
             )
         `
-		if (results) {
-			console.log("Results of creating tables -> ", results)
-			return
+
+		if (keywordsResults) {
+			console.log("Results of creating tables -> ", quotesResults)
 		}
+
+		return
 	} catch (err) {
 		console.error("An error occured while creating the tables: ")
 		console.error(err)
@@ -31,7 +38,7 @@ async function createTables() {
 
 async function seedTables() {
 	try {
-		const results = await sql`
+		const quoteResults = await sql`
             INSERT INTO quotes (body)
                 VALUES (
                     "Start the war... that's never been seen before...",
@@ -57,7 +64,9 @@ async function seedTables() {
                     "I could model for apple sauce",
                     "Well ya should've ate it!"
                 );
+        `
 
+		const keywordsResults = await sql`
             INSERT INTO keywords (body)
                 VALUES (
                     "alex",
@@ -69,6 +78,11 @@ async function seedTables() {
                     "epic"
                 );
         `
+
+		if (quoteResults && keywordsResults) {
+			console.log("Quote Insert Results -> ", quoteResults)
+			console.log("Keyword Insert Results -> ", keywordsResults)
+		}
 	} catch (err) {
 		console.error("An error occured while seeding the db tables: ")
 		console.error(err)
