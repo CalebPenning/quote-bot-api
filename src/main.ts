@@ -3,6 +3,8 @@ import type { Request, Response } from "express"
 import cors from "cors"
 import * as dotenv from "dotenv"
 
+import quotesRoutes from "./routes/quotes"
+
 dotenv.config()
 const port = process.env.PORT
 
@@ -11,9 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get("/", (_: Request, res: Response) => {
-	res.status(200).json({ message: "hello world!" })
-})
+app.use("/quotes", quotesRoutes)
 
 app.get("/health", (_: Request, res: Response) => {
 	res.status(200).send("OK")
