@@ -1,5 +1,6 @@
 import sql from "./db"
-;(async () => {
+    ; (async () => {
+    console.log(sql)
 	await createTables()
 	await seedTables()
 	console.log("Tables created and seeded successfully")
@@ -9,8 +10,8 @@ import sql from "./db"
 async function createTables() {
 	try {
 		const quotesResults = await sql`
-            CREATE TABLE IF NOT EXISTS quotes (
-                id SERIAL UNIQUE PRIMARY KEY
+            CREATE TABLE quotes (
+                id SERIAL UNIQUE PRIMARY KEY,
                 body TEXT NOT NULL UNIQUE
             )
         `
