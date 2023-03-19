@@ -2,10 +2,14 @@
   "name": "quote-bot-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc"
+    "postinstall": "tsc",
+    "format": "prettier --write .",
+    "createdb": "node ./dist/db/seed.js",
+    "compile": "tsc",
+    "postcompile": "node ."
   },
   "keywords": [],
   "author": "",
