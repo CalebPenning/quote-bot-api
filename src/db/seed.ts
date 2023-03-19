@@ -1,6 +1,9 @@
 import sql from "./db"
 import { quotesSeed, keywordsSeed } from "./data"
 
+// This file only exists to be executed if a brand new database has no entries,
+// we will not drop and reseed the tables with every deployment
+
 const mappedQuotes = quotesSeed.map((quote) => ({
 	body: quote,
 }))
@@ -9,7 +12,6 @@ const mappedKeywords = keywordsSeed.map((keyword) => ({
 }))
 
 ;(async () => {
-	console.log(sql)
 	await createTables()
 	await seedTables()
 	console.log("Tables created and seeded successfully")
