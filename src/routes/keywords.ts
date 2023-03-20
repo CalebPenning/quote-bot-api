@@ -37,12 +37,12 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.delete("/:id", async (req: Request, res: Response) => {
 	try {
-		const id = req.params.id
+		const id = +req.params.id
 		if (!id) res.status(400).json({ error: "Invalid id" })
 
 		const results = await sql`
 			delete from keywords
-			where id = ${sql(id)}
+			where id = ${id}
 			returning *
 		`
 
