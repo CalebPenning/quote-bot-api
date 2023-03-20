@@ -9,7 +9,7 @@ router.get("/", async (req: Request, res: Response) => {
       select * from keywords
     `
 		res.status(200).json({
-			quotes: allKeywords,
+			keywords: allKeywords,
 		})
 	} catch (err) {
 		res.status(500).json({ error: err })
