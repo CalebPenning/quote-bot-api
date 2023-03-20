@@ -27,7 +27,7 @@ router.post("/", async (req: Request, res: Response) => {
 			})
 		}
 		const result = await sql`
-			insert into quotes ${sql(body, "body")}
+			insert into quotes ${sql(body.body.body, "body")}
 			returning *
 		`
 		res.status(201).json(result)

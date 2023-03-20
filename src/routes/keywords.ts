@@ -26,7 +26,7 @@ router.post("/", async (req: Request, res: Response) => {
 			})
 		}
 		const result = await sql`
-			insert into keywords ${sql(body, "body")}
+			insert into keywords ${sql(body.body.body, "body")}
 			returning *
 		`
 		res.status(201).json(result)
