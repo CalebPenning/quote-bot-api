@@ -9,10 +9,15 @@ import quotesRoutes from "./routes/quotes"
 
 dotenv.config()
 const port = process.env.PORT
+const origin = process.env.CLIENT_HOST
 
 const app = express()
 
-app.use(cors())
+app.use(
+	cors({
+		origin,
+	})
+)
 app.use(express.json())
 app.use(morgan("tiny"))
 
