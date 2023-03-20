@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express"
+import { Request, Response, Router } from "express"
 import sql from "../db/db"
 
 const router = Router()
@@ -19,15 +19,14 @@ router.get("/", async (req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
 	try {
 		const { body } = req.body
-		console.log({ req })
-		// if (!body.body) {
-		// 	return res.status(400).json({
-		// 		error:
-		// 			"Request body did not have 'body' property. 'body' is a required property.",
-		// 	})
-		// }
+		if (!body) {
+			return res.status(400).json({
+				error:
+					"Request body did not have 'body' property. 'body' is a required property.",
+			})
+		}
 		const result = await sql`
-			insert into keywords ${sql(body.body.body, "body")}
+			insert into keywords ${sql(body, "body")}
 			returning *
 		`
 		res.status(201).json(result)

@@ -21,12 +21,12 @@ router.post("/", async (req: Request, res: Response) => {
 		const { body } = req.body
 		console.log({ req })
 		console.log(body)
-		// if (!body.body) {
-		// 	return res.status(400).json({
-		// 		error:
-		// 			"Request body did not have 'body' property. 'body' is a required property.",
-		// 	})
-		// }
+		if (!body) {
+			return res.status(400).json({
+				error:
+					"Request body did not have 'body' property. 'body' is a required property.",
+			})
+		}
 		const result = await sql`
 			insert into quotes ${sql(body, "body")}
 			returning *
