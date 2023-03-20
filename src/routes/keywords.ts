@@ -5,11 +5,11 @@ const router = Router()
 
 router.get("/", async (req: Request, res: Response) => {
 	try {
-		const allQuotes = await sql`
-      select * from quotes
+		const allKeywords = await sql`
+      select * from keywords
     `
 		res.status(200).json({
-			quotes: allQuotes,
+			quotes: allKeywords,
 		})
 	} catch (err) {
 		res.status(500).json({ error: err })
@@ -26,7 +26,7 @@ router.post("/", async (req: Request, res: Response) => {
 			})
 		}
 		const result = await sql`
-			insert into quotes ${sql(body, "body")}
+			insert into keywords ${sql(body, "body")}
 			returning *
 		`
 		res.status(201).json(result)
