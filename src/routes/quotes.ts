@@ -18,7 +18,7 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		const { body } = req
+		const { body } = req.body
 		console.log({ req })
 		console.log(body)
 		// if (!body.body) {
@@ -28,7 +28,7 @@ router.post("/", async (req: Request, res: Response) => {
 		// 	})
 		// }
 		const result = await sql`
-			insert into quotes ${sql(body.body.body, "body")}
+			insert into quotes ${sql(body, "body")}
 			returning *
 		`
 		res.status(201).json(result)
