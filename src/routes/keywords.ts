@@ -19,6 +19,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
 	try {
 		const { body } = req
+		console.log(body)
 		if (!body.body) {
 			return res.status(400).json({
 				error:
