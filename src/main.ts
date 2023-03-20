@@ -9,13 +9,14 @@ import quotesRoutes from "./routes/quotes"
 
 dotenv.config()
 const port = process.env.PORT
-const origin = process.env.CLIENT_HOST
+const clientOrigin = process.env.CLIENT_HOST as string
+const localhostOrigin = process.env.LOCAL_HOST as string
 
 const app = express()
 
 app.use(
 	cors({
-		origin,
+		origin: [clientOrigin, localhostOrigin],
 	})
 )
 app.use(express.json())
