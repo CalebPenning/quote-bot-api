@@ -18,8 +18,9 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		const { body } = req.body
-		if (!body) {
+		const body = req.body
+		console.log("request body", body)
+		if (!body.body) {
 			return res.status(400).json({
 				error:
 					"Request body did not have 'body' property. 'body' is a required property.",
