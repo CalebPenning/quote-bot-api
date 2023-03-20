@@ -36,4 +36,24 @@ router.post("/", async (req: Request, res: Response) => {
 	}
 })
 
+router.delete("/:id", async (req: Request, res: Response) => {
+	try {
+		const id = req.params.id
+		if (!id) res.status(400).json({ error: "Invalid id" })
+
+		const results = await sql`
+			delete from quotes
+			where id = ${sql(id)}
+			returning *
+		`
+
+		if (!results.length)
+			return res.status(400).json({ error: "something went wrong!" })
+		else res.json(results)
+	} catch (err) {
+		console.error(err)
+		res.status(400).json({ error: err })
+	}
+})
+
 export default router
